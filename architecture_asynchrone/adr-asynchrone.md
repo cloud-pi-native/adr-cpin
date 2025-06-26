@@ -16,6 +16,10 @@ Cet ADR traite des architecture asynchrones et des besoins de créer des charges
 ## Participants
  - ServiceTeam
 
+## Options Considérées
+
+N/A
+
 # Contexte
 
 Les architectures asynchrones sont essentielles pour concevoir des applications cloud-native capables de gérer des charges variées, des traitements intensifs ou des délais d’exécution étendus. Dans un environnement comme Kubernetes, ces architectures permettent de découpler les composants, d’optimiser l’usage des ressources et d’améliorer la résilience des systèmes.
