@@ -1,3 +1,20 @@
+# Titre
+
+Cet ADR traite des architecture asynchrones et des besoins de créer des charges de travail en fonction d'un critère "métier"
+
+## Statut
+
+|STATUT| Date |
+|------|--|
+| Brouillon | |
+| Proposée | 26/06/2025 |
+| Acceptée | |
+| Rejetée | |
+| Obsolète | |
+| Remplacée | |
+
+## Participants
+ - ServiceTeam
 
 # Contexte
 
@@ -856,3 +873,16 @@ taskManager.start().catch((err) => {
   }
 }
 ```
+
+
+## Décision
+
+TODO
+
+## Conséquences
+
+TODO
+
+## Liens et Références
+
+TODO
