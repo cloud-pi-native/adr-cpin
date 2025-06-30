@@ -890,13 +890,6 @@ taskManager.start().catch((err) => {
 
 (Quels sont les impacts de cette décision ? Positifs comme négatifs. Quels compromis ont été faits ?)
 
-## Alternatives considérées 
-
-@TODO
-(Quelles autres options ont été envisagées ? Pourquoi ont-elles été rejetées ?)
-
-
-
 ## Liens et Références
 
 @TODO
