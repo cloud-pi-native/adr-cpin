@@ -881,12 +881,28 @@ taskManager.start().catch((err) => {
 
 ## Décision
 
-TODO
+@TODO
+(Quelle est la décision prise ? Quelle solution est retenue ?)
 
 ## Conséquences
 
-TODO
+@TODO
+
+(Quels sont les impacts de cette décision ? Positifs comme négatifs. Quels compromis ont été faits ?)
+
+## Alternatives considérées 
+
+@TODO
+(Quelles autres options ont été envisagées ? Pourquoi ont-elles été rejetées ?)
+
+
 
 ## Liens et Références
 
-TODO
+@TODO
+(Liens ou documents utiles qui appuient la décision)
+
+## Notes
+
+@TODO
+(Facultatif. Toute information complémentaire, pistes futures, ou questions ouvertes.)
