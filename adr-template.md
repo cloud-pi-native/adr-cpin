@@ -10,7 +10,7 @@ Un titre clair et concis décrivant la décision architecturale.
 
 {format YYYY-MM-DD}
 
-Les différents statuts et les dates de prises de décision peuvent être référencés.
+Les différents statuts et les dates de prises de décision peuvent être référencés sous forme de tableau
 
 ## Participant
 
