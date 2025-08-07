@@ -193,6 +193,10 @@ spec:
       - x-api-key
 ```
 
+L'API Gateway permet également l'implémentation de plusieurs éléments de sécurité : basic authentification, CORS, IP whitelist, JWT, MTLS, OIDC et de gestion de traffic : circuit breakers, client traffic policy, failover, etc.
+
+Voir la documentation officielle sur la [sécurité](https://gateway.envoyproxy.io/docs/tasks/security/) et la [gestion de traffic](https://gateway.envoyproxy.io/docs/tasks/traffic/)
+
 ## Décision
 
 A instruire.
@@ -209,3 +213,4 @@ Liste des liens de référence :
  - [API Gateway](https://kubernetes.io/docs/concepts/services-networking/gateway/)
  - [Migration Ingress vers Gatewayy](https://gateway-api.sigs.k8s.io/guides/migrating-from-ingress/)
  - [Envoy](https://gateway.envoyproxy.io/docs/api/gateway_api/)
+  - [Tuto d'exemples](https://github.com/cloud-pi-native/tuto-java-infra-helm/tree/feat/gateway)
