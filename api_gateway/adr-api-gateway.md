@@ -99,6 +99,8 @@ spec:
 ```
 Cette Gateway écoute HTTP (80) et HTTPS (443) uniquement pour les hostnames compatible avec le nom : *.formation-app-gateway.cpin.numerique-interieur.com
 
+L'implémentation mise en oeuvre sur PAX est envoy, voir la [documentation](https://gateway.envoyproxy.io/docs/api/gateway_api/) 
+
  2. Le kind HTTPRoute (et TCPRoute / UDPRoute mais non utilisé dans le cadre CPiN). Cet object est à la charge des projets.
 
 Exemple d'une HTTPRoute
@@ -206,3 +208,4 @@ Liste des liens de référence :
  - [API Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
  - [API Gateway](https://kubernetes.io/docs/concepts/services-networking/gateway/)
  - [Migration Ingress vers Gatewayy](https://gateway-api.sigs.k8s.io/guides/migrating-from-ingress/)
+ - [Envoy](https://gateway.envoyproxy.io/docs/api/gateway_api/)
