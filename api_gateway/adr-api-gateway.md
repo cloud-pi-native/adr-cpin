@@ -228,4 +228,4 @@ Liste des liens de référence :
  - [API Gateway](https://kubernetes.io/docs/concepts/services-networking/gateway/)
  - [Migration Ingress vers Gatewayy](https://gateway-api.sigs.k8s.io/guides/migrating-from-ingress/)
  - [Envoy](https://gateway.envoyproxy.io/docs/api/gateway_api/)
-  - [Tuto d'exemples](https://github.com/cloud-pi-native/tuto-java-infra-helm/tree/feat/gateway)
+  - [Tuto d'exemples CPiN](https://github.com/cloud-pi-native/tuto-java-infra-helm/tree/feat/gateway)
