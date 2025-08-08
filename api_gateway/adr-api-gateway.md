@@ -23,7 +23,11 @@ Cet ADR traite de l'API **Gateway** de Kubernetes en complément ou remplacement
 
 ## Contexte et Problème
 
-L'API [Gateway](https://kubernetes.io/docs/concepts/services-networking/gateway/) de kubernetes est le successeur de l'API Ingress.
+L'API [Gateway](https://kubernetes.io/docs/concepts/services-networking/gateway/) de kubernetes est le successeur de l'API Ingress et permet de gérer les règles d'exposition d'une application en dehors d'un cluster Kubernetes / OpenShift, généralement pour l'exposition HTTPS d'une application.
+
+L'API historique de Kubernetes pour faire cette opération est l'API Ingress. Une nouvelle API nommée Gateway permet d'aller plus loin la configuration. Cet ADR propose de décrire l'utilisation de l'API Gateway dans le cadre de l'offre CPiN. 
+
+### Ingress
 
 **Ingress** est l'API historique de Kubernetes pour gérer le trafic entrant HTTP/HTTPS :
 
@@ -33,7 +37,13 @@ L'API [Gateway](https://kubernetes.io/docs/concepts/services-networking/gateway/
 - Pas de séparation claire entre les rôles (admin infrastructure vs développeurs)
 - Configuration monolithique
 
+Le schéma suivant présente une vue globale de l'utilisation d'un Ingress :
+
+![Ingress](./img/ingress-basic-example.svg)
+
 > L'API Ingress est une feature stable depuis la version 1.19 de Kubernetes mais que cette API est maintenant à un état *gelée* et ne prend donc plus de nouvelles fonctionnalités.
+
+### Gateway
 
 
 **Gateway** est l'API moderne qui succède à **Ingress** avec des capacités étendues :
@@ -49,6 +59,11 @@ L'API [Gateway](https://kubernetes.io/docs/concepts/services-networking/gateway/
 - Possibilité de déléguer des configurations aux équipes applicatives
 
 > La famille d'API Gateway est une extension des API Kubernetes en version **gateway.networking.k8s.io/v1** 
+
+Le schéma suivant présente une vue globale de l'utilisation de l'API Gateway :
+
+![Ingress](./img/ingress-basic-example.svg)
+
 
 ## Options Considérées
 
