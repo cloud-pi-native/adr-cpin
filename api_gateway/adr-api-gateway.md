@@ -64,7 +64,7 @@ Le schéma suivant présente une vue globale de l'utilisation d'un Ingress :
 
 Le schéma suivant présente une vue globale de l'utilisation de l'API Gateway :
 
-![Ingress](./img/ingress-basic-example.svg)
+![Ingress](./img/httproute-basic-example.svg)
 
 
 ## Options Considérées
