@@ -36,6 +36,7 @@ L'API historique de Kubernetes pour faire cette opération est l'API Ingress. Un
 - Implementation spécifique à chaque contrôleur Ingress
 - Pas de séparation claire entre les rôles (admin infrastructure vs développeurs)
 - Configuration monolithique
+- Extension via des labels/annotations avec les limites inhérentes à ce système
 
 Le schéma suivant présente une vue globale de l'utilisation d'un Ingress :
 
