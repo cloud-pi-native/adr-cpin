@@ -216,6 +216,21 @@ L'API Gateway permet également l'implémentation de plusieurs éléments de sé
 
 Voir la documentation officielle sur la [sécurité](https://gateway.envoyproxy.io/docs/tasks/security/) et la [gestion de traffic](https://gateway.envoyproxy.io/docs/tasks/traffic/)
 
+## Choix de l'implémentation
+
+Envoy gateway a été sélectionnée parmi les différentes implémentations existantes:
+
+- Basé sur envoy proxy, projet utilisé à grande échelle
+- Nombreuses fonctionnalités, notamment sur la sécurité avec l'authentification via oidc, jwt, api-key, basic-auth, ip, ...
+- Projet actif et à l'écoute de sa communauté (ajout de l'authentification via api-key après ouverture d'une issue github)
+- Installable sur k8s vanilla, openshift ainsi que gke autopilot
+
+D'autres projets ont été étudiés:
+
+- Kong: modèle tarifaire flou
+- Contour: basé du envoy proxy, moins de fonctionnalité
+- Kuadrant: sponsorisé par RedHat, prometteur mais en alpha
+
 ## Décision
 
 A instruire.
