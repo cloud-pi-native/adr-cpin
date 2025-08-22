@@ -42,12 +42,12 @@ Le schéma suivant présente une vue globale de l'utilisation d'un Ingress :
 
 ![Ingress](./img/ingress-basic-example.svg)
 
-> L'API Ingress est une feature stable depuis la version 1.19 de Kubernetes mais que cette API est maintenant à un état *gelée* et ne prend donc plus de nouvelles fonctionnalités.
+> L'API Ingress est une feature stable depuis la version 1.19 de Kubernetes mais cette API est maintenant *gelée* et ne prend donc plus de nouvelles fonctionnalités.
 
 ### Gateway
 
 
-**Gateway** est l'API moderne qui succède à **Ingress** avec des capacités étendues :
+**Gateway** est l'API moderne qui succède à **Ingress** avec des capacités étendues (GA v1.3):
 
 - Support multi-protocoles (HTTP, TCP, UDP, gRPC, etc.)
 - Architecture modulaire avec séparation des responsabilités :
@@ -58,6 +58,7 @@ Le schéma suivant présente une vue globale de l'utilisation d'un Ingress :
 - Validation native des configurations
 - Support natif du cross-namespace routing
 - Possibilité de déléguer des configurations aux équipes applicatives
+- Possibilité d'étendre les fonctionnalités via des objets selon le provider choisi
 
 > La famille d'API Gateway est une extension des API Kubernetes en version **gateway.networking.k8s.io/v1** 
 
