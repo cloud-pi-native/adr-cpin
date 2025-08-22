@@ -79,7 +79,8 @@ L'API Ingress continue d'être supportée par Kubernetes et il est possible à d
 
 L'API Gateway est composées de 2 grandes parties :
 
- 1. Le kind Gateway qui globalement correspond à l'ingressController et l'implémentation technique sous jacente (nginx, envoy, haproxy, etc.). Dans le contexte CPiN, ce composant n'est pas à la main des projets mais est provisionné par CPiN
+#### Gateway
+ Le kind Gateway qui globalement correspond à l'ingressController et l'implémentation technique sous jacente (nginx, envoy, haproxy, etc.). Dans le contexte CPiN, ce composant n'est pas à la main des projets mais est provisionné par CPiN
 
 Voici un exemple simple d'utilisation de l'API Gateway
 
@@ -118,7 +119,8 @@ Cette Gateway écoute HTTP (80) et HTTPS (443) uniquement pour les hostnames com
 
 L'implémentation mise en oeuvre sur PAX est envoy, voir la [documentation](https://gateway.envoyproxy.io/docs/api/gateway_api/) 
 
- 2. Le kind HTTPRoute (et TCPRoute / UDPRoute mais non utilisé dans le cadre CPiN). Cet object est à la charge des projets.
+#### Routes
+Le kind HTTPRoute (et TCPRoute / UDPRoute mais non utilisé dans le cadre CPiN). Cet object est à la charge des projets.
 
 Exemple d'une HTTPRoute
 ```yaml
