@@ -231,6 +231,7 @@ D'autres projets ont été étudiés:
 - Contour: basé du envoy proxy, moins de fonctionnalité
 - Istio: moins de fonctionnalité, ajoute un service mesh pas forcément désiré
 - Kuadrant: sponsorisé par RedHat, prometteur mais en alpha
+- InGate: futur de l'ingress controller nginx, encore en phase de développement
 
 ## Décision
 
