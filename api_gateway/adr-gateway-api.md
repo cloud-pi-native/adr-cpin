@@ -1,6 +1,6 @@
 # Titre
 
-Cet ADR traite de l'API **Gateway** de Kubernetes en complément ou remplacement de l'API **Ingress**, de leurs différences et des cas d'usages dans le cadre de CPiN
+Cet ADR traite de la **Gateway** API de Kubernetes en complément ou remplacement de l'API **Ingress**, de leurs différences et des cas d'usages dans le cadre de CPiN
 
 ## Statut
 
@@ -23,7 +23,7 @@ Cet ADR traite de l'API **Gateway** de Kubernetes en complément ou remplacement
 
 ## Contexte et Problème
 
-L'API [Gateway](https://kubernetes.io/docs/concepts/services-networking/gateway/) de kubernetes est le successeur de l'API Ingress et permet de gérer les règles d'exposition d'une application en dehors d'un cluster Kubernetes / OpenShift, généralement pour l'exposition HTTPS d'une application.
+La [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/) de kubernetes est le successeur de l'API Ingress et permet de gérer les règles d'exposition d'une application en dehors d'un cluster Kubernetes / OpenShift, généralement pour l'exposition HTTPS d'une application.
 
 L'API historique de Kubernetes pour faire cette opération est l'API Ingress. Une nouvelle API nommée Gateway permet d'aller plus loin la configuration. Cet ADR propose de décrire l'utilisation de l'API Gateway dans le cadre de l'offre CPiN. 
 
@@ -60,7 +60,7 @@ Le schéma suivant présente une vue globale de l'utilisation d'un Ingress :
 
 > La famille d'API Gateway est une extension des API Kubernetes en version **gateway.networking.k8s.io/v1** 
 
-Le schéma suivant présente une vue globale de l'utilisation de l'API Gateway :
+Le schéma suivant présente une vue globale de l'utilisation de l'Gateway API :
 
 ![Ingress](./img/ingress-basic-example.svg)
 
@@ -71,15 +71,15 @@ Le schéma suivant présente une vue globale de l'utilisation de l'API Gateway :
 
 L'API Ingress continue d'être supportée par Kubernetes et il est possible à date de continuer à les utiliser. Il n'existe pas d'obligation à date de migrer les Ingress vers des Gateway. Cependant, l'API Gateway est plus riche que l'API Ingress et il est donc intéressant que les projets commencent à les utiliser notamment pour les fonctionnalités avancées et non disponibles en standard avec les ingress comme la sécuriation par API-Key, le throttling (limitation du débit API), la séparation de la configuration entre gateway et route. La gestion des protocoles autres que HTTP(S) est considérée hors scope, en effet, l'exposition par CDS impose l'utilisation du protocole HTTPS.
 
-> A date, seuls les environnements PAX sont configurés pour utiliser l'API Gateway. Cette fonctionnalité sera implémentée sur CPiN prochainement.
+> A date, seuls les environnements PAX sont configurés pour utiliser la Gateway API. Cette fonctionnalité sera implémentée sur CPiN prochainement.
 
 ### Mise en oeuvre des Gateway
 
-L'API Gateway est composées de 2 grandes parties :
+La Gateway API est composées de 2 grandes parties :
 
  1. Le kind Gateway qui globalement correspond à l'ingressController et l'implémentation technique sous jacente (nginx, envoy, haproxy, etc.). Dans le contexte CPiN, ce composant n'est pas à la main des projets mais est provisionné par CPiN
 
-Voici un exemple simple d'utilisation de l'API Gateway
+Voici un exemple simple d'utilisation de la Gateway API
 
 ```yaml
 # 1. Définition de la Gateway
@@ -208,7 +208,7 @@ spec:
       - x-api-key
 ```
 
-L'API Gateway permet également l'implémentation de plusieurs éléments de sécurité : basic authentification, CORS, IP whitelist, JWT, MTLS, OIDC et de gestion de traffic : circuit breakers, client traffic policy, failover, etc.
+La Gateway API permet également l'implémentation de plusieurs éléments de sécurité : basic authentification, CORS, IP whitelist, JWT, MTLS, OIDC et de gestion de traffic : circuit breakers, client traffic policy, failover, etc.
 
 Voir la documentation officielle sur la [sécurité](https://gateway.envoyproxy.io/docs/tasks/security/) et la [gestion de traffic](https://gateway.envoyproxy.io/docs/tasks/traffic/)
 
@@ -218,7 +218,7 @@ A instruire.
 
 ## Conséquences
 
-Il est conseillé d'utiliser l'API Gateway sur CPiN (pour l'instant uniquement sur PAX) pour l'exposition d'API nécessitant un degrès fin de configuration, notamment la limitation de débit (rate limit) et l'authentification. 
+Il est conseillé d'utiliser la Gateway API sur CPiN (pour l'instant uniquement sur PAX) pour l'exposition d'API nécessitant un degrès fin de configuration, notamment la limitation de débit (rate limit) et l'authentification. 
 
 
 ## Liens et Références
