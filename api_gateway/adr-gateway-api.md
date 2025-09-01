@@ -36,17 +36,18 @@ L'API historique de Kubernetes pour faire cette opération est l'API Ingress. Un
 - Implementation spécifique à chaque contrôleur Ingress
 - Pas de séparation claire entre les rôles (admin infrastructure vs développeurs)
 - Configuration monolithique
+- Extension via des labels/annotations avec les limites inhérentes à ce système
 
 Le schéma suivant présente une vue globale de l'utilisation d'un Ingress :
 
 ![Ingress](./img/ingress-basic-example.svg)
 
-> L'API Ingress est une feature stable depuis la version 1.19 de Kubernetes mais que cette API est maintenant à un état *gelée* et ne prend donc plus de nouvelles fonctionnalités.
+> L'API Ingress est une feature stable depuis la version 1.19 de Kubernetes mais cette API est maintenant *gelée* et ne prend donc plus de nouvelles fonctionnalités.
 
 ### Gateway
 
 
-**Gateway** est l'API moderne qui succède à **Ingress** avec des capacités étendues :
+**Gateway** est l'API moderne qui succède à **Ingress** avec des capacités étendues (GA v1.3):
 
 - Support multi-protocoles (HTTP, TCP, UDP, gRPC, etc.)
 - Architecture modulaire avec séparation des responsabilités :
@@ -57,12 +58,13 @@ Le schéma suivant présente une vue globale de l'utilisation d'un Ingress :
 - Validation native des configurations
 - Support natif du cross-namespace routing
 - Possibilité de déléguer des configurations aux équipes applicatives
+- Possibilité d'étendre les fonctionnalités via des objets selon le provider choisi
 
 > La famille d'API Gateway est une extension des API Kubernetes en version **gateway.networking.k8s.io/v1** 
 
 Le schéma suivant présente une vue globale de l'utilisation de l'Gateway API :
 
-![Ingress](./img/ingress-basic-example.svg)
+![Ingress](./img/httproute-basic-example.svg)
 
 
 ## Options Considérées
@@ -77,7 +79,8 @@ L'API Ingress continue d'être supportée par Kubernetes et il est possible à d
 
 La Gateway API est composées de 2 grandes parties :
 
- 1. Le kind Gateway qui globalement correspond à l'ingressController et l'implémentation technique sous jacente (nginx, envoy, haproxy, etc.). Dans le contexte CPiN, ce composant n'est pas à la main des projets mais est provisionné par CPiN
+#### Gateway
+ Le kind Gateway qui globalement correspond à l'ingressController et l'implémentation technique sous jacente (nginx, envoy, haproxy, etc.). Dans le contexte CPiN, ce composant n'est pas à la main des projets mais est provisionné par CPiN
 
 Voici un exemple simple d'utilisation de la Gateway API
 
@@ -116,7 +119,8 @@ Cette Gateway écoute HTTP (80) et HTTPS (443) uniquement pour les hostnames com
 
 L'implémentation mise en oeuvre sur PAX est envoy, voir la [documentation](https://gateway.envoyproxy.io/docs/api/gateway_api/) 
 
- 2. Le kind HTTPRoute (et TCPRoute / UDPRoute mais non utilisé dans le cadre CPiN). Cet object est à la charge des projets.
+#### Routes
+Le kind HTTPRoute (et TCPRoute / UDPRoute mais non utilisé dans le cadre CPiN). Cet object est à la charge des projets.
 
 Exemple d'une HTTPRoute
 ```yaml
@@ -211,6 +215,23 @@ spec:
 La Gateway API permet également l'implémentation de plusieurs éléments de sécurité : basic authentification, CORS, IP whitelist, JWT, MTLS, OIDC et de gestion de traffic : circuit breakers, client traffic policy, failover, etc.
 
 Voir la documentation officielle sur la [sécurité](https://gateway.envoyproxy.io/docs/tasks/security/) et la [gestion de traffic](https://gateway.envoyproxy.io/docs/tasks/traffic/)
+
+## Choix de l'implémentation
+
+Envoy gateway a été sélectionnée parmi les différentes implémentations existantes:
+
+- Basé sur envoy proxy, projet utilisé à grande échelle
+- Nombreuses fonctionnalités, notamment sur la sécurité avec l'authentification via oidc, jwt, api-key, basic-auth, ip, ...
+- Projet actif et à l'écoute de sa communauté (ajout de l'authentification via api-key après ouverture d'une issue github)
+- Installable sur k8s vanilla, openshift ainsi que gke autopilot
+
+D'autres projets ont été étudiés:
+
+- Kong: modèle tarifaire flou
+- Contour: basé du envoy proxy, moins de fonctionnalité
+- Istio: moins de fonctionnalité, ajoute un service mesh pas forcément désiré
+- Kuadrant: sponsorisé par RedHat, prometteur mais en alpha
+- InGate: futur de l'ingress controller nginx, encore en phase de développement
 
 ## Décision
 
