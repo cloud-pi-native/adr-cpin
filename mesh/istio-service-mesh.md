@@ -65,6 +65,70 @@ Les piliers visés pour la mise en place d'Istio ambient:
 - Chaque projet pourra définir des `PeerAuthentication` et `AuthorizationPolicy` minimales
 - **Dans un second temps** intégrer à la Gateway API pour l'exposition nord-sud, en cohérence avec l'ADR API Gateway
 
+###  Activation par les projets 
+
+L'activation par les projets se fait en plusieurs étapes :
+ - Passage de l'ingress en https
+ - Utilisation d'Istio Ambient
+
+
+**Passage de l'ingress en https**
+Le passage en https se fait via l'annotation 
+
+```yaml
+  annotations:
+    route.openshift.io/termination: edge
+```
+ainsi que la configuration TLS
+```yaml
+  tls:
+  - hosts:
+    - mon.url.rie
+    secretName: monsecret
+```
+
+Exemple :
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    route.openshift.io/termination: edge
+  name: moningress
+spec:
+  rules:
+  - host: mon.url.rie
+    http:
+      paths:
+      - backend:
+          service:
+            name: monservice
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - mon.url.rie
+    secretName: monsecret
+```
+
+Ensuite, il faut configurer la CDS pour qu'elle renvoie le traffic en https. Cela se fait via son CPH ou via le paramètre ```redirect: true``` sur OpenCDS
+
+**Utilisation d'Istio Ambient**
+
+Un projet peut ajouter le label suivant à ses charges de travail sur ses deployment / STS :
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mon-app
+  labels:
+    dataplane-mode: ambient
+```
+
+
 ## Conséquences
 
 Effets positifs:
