@@ -4,13 +4,13 @@ Cet AdR montre comment utiliser un service Mesh permettant de chiffrer les commu
 
 ## Statut
 
-Proposé
+Brouillon
 
 ## Date
 
 |Date | Status | Commentaires |
 |---|---|---|
-| 2025-11-20 | Proposé | Première version |
+| 2025-11-20 | Brouillon | Première version |
 
 
 ## Participant
