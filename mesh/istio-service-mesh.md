@@ -38,36 +38,50 @@ le trajet d'une requête HTTP(S) peut se découper en plusieurs phase :
 | 3 | Ingres | Pods applicatifs | Non | 
 | 4 | Pods | Pods | A la main du projet | En activant le mesh, le flux passe par un ztunnel et en mTLS |
 
-
 ## Options Considérées
 
-Lister les différentes options analysées avant d'arrêter la décision. 
-Chaque alternative peut inclure :
-- Une description
-- Les avantages
-- Les inconvénients
-- Les raisons pour lesquelles elle a été rejetée (le cas échéant)
+1. Sans service mesh (Ingress + NetworkPolicy + bibliothèques applicatives)
+   - Avantages: simplicité opérationnelle, coût réduit, pas de sidecar
+   - Inconvénients: mTLS bout-en-bout difficile, features hétérogènes dans le code, observabilité non uniforme, stratégies de trafic limitées
+   - Rejetée: ne répond pas aux exigences de sécurité et de gouvernance transverses
 
-TODO
+2. Istio (sidecar model classique)
+   - Avantages: couverture fonctionnelle complète (sécurité, trafic, observabilité), intégration Gateway API, large communauté, maturité
+   - Inconvénients: overhead de sidecar, complexité d'exploitation
+   - Non retenue
 
-### Istio
-
-TODO mise en place sur le cluster
-
-### Configuration pour les projets
-
-TODO mise en place par les projets
-
+3. Istio Ambient (sans sidecar)
+   - Avantages: réduction overhead, modèle L4/L7 séparé
+   - Inconvénients: encore en évolution, soucis de deploiement sur des clusters managés
+   - Retenue
 
 ## Décision
 
-Confirmer le mode d'installation avec exploitation : est ce que l'opérateur est systématiquement mis en place ou à la demande ?
+Nous adoptons Istio en modèle ambient pour fournir un service mesh au trafic est-ouest, actuellement le trafic nord-sud est géré par l'openshift-router/OVN et ne permet pas de gérer le chiffrement de bout en bout.
 
-Les projets ont la main sur le chiffrement des communications entre leurs PODs.
+Les piliers visés pour la mise en place d'Istio ambient:
 
-> Cependant il reste un point de vulnérabilité sur le chiffrement des flux entre les ingress et le premier pod.
+- Possibilité d'ajouter individuellement des élements au mesh avec le label `dataplane-mode=ambient` par namespace/deployment/...
+- Chaque projet pourra définir des `PeerAuthentication` et `AuthorizationPolicy` minimales
+- **Dans un second temps** intégrer à la Gateway API pour l'exposition nord-sud, en cohérence avec l'ADR API Gateway
 
+## Conséquences
+
+Effets positifs:
+
+- Sécurité par défaut _possible_: chiffrement mTLS, identité de service, gestion des politiques de sécurité par projet
+- Résilience accrue et pilotage fin du trafic sans refactor applicatif
+- Observabilité transverse unifiée facilitant SLO/SLA et troubleshooting
+
+Effets négatifs / coûts:
+
+- Besoin de montée en compétence de l'équipe
+- Mise en place des outils de monitoring et exploitation de la solution
+
+Actions en cours:
+
+- PoC avec un projet pilote pour valider la solution
 
 ## Liens et Références
 
-Fournit des références vers des documents complémentaires, discussions, tickets de suivi, ou toute autre ressource pertinente liée à cette décision.
+- Istio Docs: `https://istio.io/latest/docs/`
