@@ -27,7 +27,7 @@ De façon plus large, cette AdR présente comment chiffrer les flux sur l'ensemb
 
 Le schéma suivant présente les différentes étapes d'une requêtes dans CPiN
 
-![schéma general](./img/istio.png)
+![schéma general](./img/istio.drawio.png)
 
 le trajet d'une requête HTTP(S) peut se découper en plusieurs phase :
 
